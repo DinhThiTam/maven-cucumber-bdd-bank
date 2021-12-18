@@ -1,0 +1,76 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 6,
+        "name": "Verify login page",
+        "description": "",
+        "id": "facebook-login-page;verify-login-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 12669902000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Open facebook application",
+            "match": {
+              "location": "FacebookSteps.openFacebookApplication()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 206821000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Verify username textbox is displayed",
+            "match": {
+              "location": "FacebookSteps.verifyUsernameTextboxIsDisplayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 119264700,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Verify password textbox is displayed",
+            "match": {
+              "location": "FacebookSteps.verifyPasswordTextboxIsDisplayed()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2164437699,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Close application",
+            "match": {
+              "location": "FacebookSteps.closeApplication()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "line": 5,
+            "name": "@displayed"
+          }
+        ]
+      }
+    ],
+    "name": "Facebook Login page",
+    "description": "I want to use this template for my feature file",
+    "id": "facebook-login-page",
+    "keyword": "Feature",
+    "uri": "verifyFacebook.feature"
+  }
+]
