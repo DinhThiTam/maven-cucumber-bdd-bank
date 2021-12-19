@@ -1,21 +1,20 @@
 [
   {
-    "line": 2,
+    "line": 1,
     "elements": [
       {
-        "line": 6,
-        "name": "Verify login page",
+        "line": 33,
+        "name": "Scenario have parameter",
         "description": "",
-        "id": "facebook-login-page;verify-login-page",
+        "id": "facebook-login-page;scenario-have-parameter;;2",
         "type": "scenario",
-        "keyword": "Scenario",
+        "keyword": "Scenario Outline",
         "steps": [
           {
             "result": {
-              "duration": 12669902000,
-              "status": "passed"
+              "status": "skipped"
             },
-            "line": 7,
+            "line": 22,
             "name": "Open facebook application",
             "match": {
               "location": "FacebookSteps.openFacebookApplication()"
@@ -24,34 +23,74 @@
           },
           {
             "result": {
-              "duration": 206821000,
-              "status": "passed"
+              "status": "undefined"
             },
-            "line": 8,
-            "name": "Verify username textbox is displayed",
-            "match": {
-              "location": "FacebookSteps.verifyUsernameTextboxIsDisplayed()"
-            },
-            "keyword": "Then "
+            "line": 23,
+            "name": "Input to Username and Password",
+            "match": {},
+            "matchedColumns": [
+              0,
+              1,
+              2
+            ],
+            "rows": [
+              {
+                "cells": [
+                  "Username",
+                  "Password",
+                  "Address"
+                ],
+                "line": 24
+              },
+              {
+                "cells": [
+                  "dttam@gmail.com",
+                  "123456",
+                  "Ha Noi"
+                ],
+                "line": 25
+              }
+            ],
+            "keyword": "When "
           },
           {
             "result": {
-              "duration": 119264700,
-              "status": "passed"
+              "status": "skipped"
             },
-            "line": 9,
-            "name": "Verify password textbox is displayed",
+            "line": 26,
+            "name": "Click to Login button",
             "match": {
-              "location": "FacebookSteps.verifyPasswordTextboxIsDisplayed()"
+              "location": "FacebookSteps.clickToLoginButton()"
             },
             "keyword": "And "
           },
           {
             "result": {
-              "duration": 2164437699,
-              "status": "passed"
+              "status": "undefined"
             },
-            "line": 10,
+            "line": 27,
+            "name": "Verify submitted info displayed",
+            "match": {},
+            "matchedColumns": [
+              0,
+              2
+            ],
+            "rows": [
+              {
+                "cells": [
+                  "dttam@gmail.com",
+                  "Ha Noi"
+                ],
+                "line": 28
+              }
+            ],
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 29,
             "name": "Close application",
             "match": {
               "location": "FacebookSteps.closeApplication()"
@@ -61,8 +100,8 @@
         ],
         "tags": [
           {
-            "line": 5,
-            "name": "@displayed"
+            "line": 20,
+            "name": "@datatable_step"
           }
         ]
       }
