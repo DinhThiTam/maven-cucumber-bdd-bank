@@ -3,7 +3,7 @@ package commons;
 import java.io.File;
 
 public class GlobalConstants {
-	public static final String DEV_APP_URL = "https://demo.nopcommerce.com";
+	public static final String DEV_APP_URL = "http://demo.guru99.com/v4/";
 	public static final String STAGING_APP_URL = "https://staging.nopcommerce.com";
 	public static final String TESTING_APP_URL = "https://test.nopcommerce.com";
 	
