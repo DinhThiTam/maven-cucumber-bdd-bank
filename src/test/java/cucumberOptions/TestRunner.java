@@ -10,11 +10,11 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
 		features = "src/test/java/features",
 		glue = "stepDefinitions",
-		dryRun = true,
+		//dryRun = true,
 		monochrome = true,
 		plugin = {"pretty", "html:target/site/cucumber-report-defalut","json:targer/site/cucumber.json"},
 		snippets = SnippetType.CAMELCASE,
-		tags = {"@datatable_step"})
+		tags = {" @register_login"})
 public class TestRunner {
 
 }
