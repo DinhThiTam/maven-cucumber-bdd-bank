@@ -4,7 +4,7 @@ Feature: Register and Login to BankGuru
   @register_login
   Scenario: Register to system and login
     Given Get login page Url
-    And Open to Register Page
+    When Open to Register Page
    	When Input to Username
    	And Click to Submit button on page
    	Then Get username and password

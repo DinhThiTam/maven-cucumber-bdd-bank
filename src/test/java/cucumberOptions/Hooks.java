@@ -1,5 +1,6 @@
 package cucumberOptions;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -9,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
@@ -26,47 +28,55 @@ public class Hooks {
 		// Run by Maven command line
 		String browser = System.getProperty("BROWSER");
 		System.out.println("Browser name run by command line = " + browser);
-
+		// Kiem tra BROWSER = null -> gan = chrome/ firefox (browser default for project)
+					if (browser == null) {
+						// Get browser name from Environment Variable in OS
+						browser = System.getenv("BROWSER");
+						if (browser == null) {
+							// Set default browser
+							browser = "firefox";
+						}
+					}
 		// Check driver đã được khởi tạo hay chưa?
 		if (driver == null) {
 			
+			
 			// Happy path case
 			try {
-				// Kiem tra BROWSER = null -> gan = chrome/ firefox (browser default for project)
-				if (browser == null) {
-					// Get browser name from Environment Variable in OS
-					browser = System.getenv("BROWSER");
-					if (browser == null) {
-						// Set default browser
-						browser = "firefox";
-					}
-				}
-
 				switch (browser) {
 				case "chrome":
 					WebDriverManager.chromedriver().setup();
-					driver = new ChromeDriver();
+					ChromeOptions chromeOptions = new ChromeOptions();
+					File file = new File (GlobalConstants.PROJECT_PATH + File.separator + "src" + File.separator + "main" + File.separator + "java" + File.separator + "browserExtensions" + File.separator + "extension_4_41_0_0.crx");
+					chromeOptions.addExtensions(file);
+					driver = new ChromeDriver(chromeOptions);
 					break;
 				case "hchrome":
 					WebDriverManager.chromedriver().setup();
-					ChromeOptions chromeOptions = new ChromeOptions();
-					chromeOptions.addArguments("headless");
-					chromeOptions.addArguments("window-size=1920x1080");
-					driver = new ChromeDriver(chromeOptions);
+					ChromeOptions hchromeOptions = new ChromeOptions();
+					hchromeOptions.addArguments("headless");
+					hchromeOptions.addArguments("window-size=1920x1080");
+					driver = new ChromeDriver(hchromeOptions);
 					break;
 				case "firefox":
 					WebDriverManager.firefoxdriver().setup();
 					System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 					System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-					driver = new FirefoxDriver();
+					 FirefoxProfile profile = new FirefoxProfile();
+					 File extensionsFile = new File(GlobalConstants.PROJECT_PATH + File.separator + "src" + File.separator + "main" +
+					 File.separator + "java" + File.separator + "browserExtensions" + File.separator + "adblock_plus-3.11.4-an+fx.xpi");
+					 profile.addExtension(extensionsFile);
+					 FirefoxOptions firefoxOptions = new FirefoxOptions();
+					 firefoxOptions.setProfile(profile);					 
+					driver = new FirefoxDriver(firefoxOptions);
 					break;
 				case "hfirefox":
 					WebDriverManager.firefoxdriver().setup();
 					System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
 					System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
-					FirefoxOptions firefoxOptions = new FirefoxOptions();
-					firefoxOptions.setHeadless(true);
-					driver = new FirefoxDriver(firefoxOptions);
+					FirefoxOptions hfirefoxOptions = new FirefoxOptions();
+					hfirefoxOptions.setHeadless(true);
+					driver = new FirefoxDriver(hfirefoxOptions);
 					break;
 				case "ie":
 					WebDriverManager.iedriver().arch32().setup();
@@ -79,9 +89,11 @@ public class Hooks {
 				}
 				// Browser crash/ stop
 			} catch (UnreachableBrowserException e) {
+				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
 				// Driver crash
 			} catch (WebDriverException e) {
+				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
 			}
 			// Code này luôn luôn được chạy dù pass hay fail

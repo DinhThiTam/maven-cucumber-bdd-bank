@@ -1,17 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>maven-cucumber-bdd</groupId>
-  <artifactId>maven-cucumber-bdd</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>maven-cucumber-bdd</name>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mvn-cucumber-reporting</groupId>
+	<artifactId>mvn-cucumber-reporting</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>mvn-cucumber-reporting</name>
+
+	<properties>
 		<cucumber.version> 1.2.5 </cucumber.version>
 		<selenium.version> 3.141.59 </selenium.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<report.version>3.20.0</report.version>
 	</properties>
 
 	<dependencies>
@@ -34,11 +37,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-testng</artifactId>
-			<version>${cucumber.version}</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -62,7 +60,7 @@
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
-			<version>3.20.0</version>
+			<version>${report.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -86,8 +84,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.18.1</version>
 				<configuration>
+					<testFailureIgnore>true</testFailureIgnore>
 					<includes>
-						<include>**/*/FacebookTestRunner.java</include>
+						<include>**/*/TestRunner.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -96,7 +95,7 @@
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
-				<version>3.10.0</version>
+				<version>${report.version}</version>
 				<executions>
 					<execution>
 						<id>execution</id>
@@ -105,11 +104,14 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>SELENIUM ONLINE - BANK GURU</projectName>
+							<projectName>BANK GURU CUCUMBER</projectName>
 							<outputDirectory>${project.build.directory}/site/cucumber-reporting</outputDirectory>
-							<cucumberOutput>${project.build.directory}/site/cucumber.json</cucumberOutput>
-							<enableFlashCharts>true</enableFlashCharts>
-							<skippedFails>true</skippedFails>
+							 <inputDirectory>${project.build.directory}/site</inputDirectory>
+                            <jsonFiles>
+                                <!-- supports wildcard or name pattern -->
+                                <param>**/*.json</param>
+                            </jsonFiles>
+							<checkBuildResult>false</checkBuildResult>
 						</configuration>
 					</execution>
 				</executions>
