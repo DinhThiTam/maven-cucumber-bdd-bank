@@ -8,39 +8,36 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumberOptions.Hooks;
+import pageObject.LoginPO;
+import pageObject.PageGerneratorManager;
 import pageUIs.LoginPageUI;
 
 public class LoginPageSteps extends BasePage{
 	WebDriver driver;
-	static String loginPageURL;
+	LoginPO loginPage;
+	TestContext testcontext;
 	
-	public LoginPageSteps() {
-		this.driver = Hooks.openAndQuitBrowser();;
+	public LoginPageSteps(TestContext testcontext) {
+		this.driver = Hooks.openAndQuitBrowser();
+		this.testcontext = testcontext;
+		loginPage = PageGerneratorManager.getLoginPage(driver);
 	}
 	
 	@Given("^Get login page Url$")
 	public void getLoginPageUrl() {
-		loginPageURL = getPageURL(driver);
+		testcontext.getDataContext().setContext(Context.LOGIN_URL, loginPage.getLoginPageUrl());
+		//loginPageURL = loginPage.getLoginPageUrl();
 	}
 
-	@Given("^Open to Register Page$")
+	@When("^Open to Register Page$")
 	public void openToRegisterPage() {
-	  waitForElementClickable(driver, LoginPageUI.HERE_LINK);
-	  clickToElement(driver, LoginPageUI.HERE_LINK);
+	 loginPage.clickToHereLink();
 	}
 
 
 	@When("^Submit valid info to form login$")
 	public void submitValidInfoToFormLogin() {
-		waitForElementVisible(driver, LoginPageUI.USERID_TEXTBOX);
-		senkeyToElement(driver, LoginPageUI.USERID_TEXTBOX, RegisterPageSteps.userName);
-		
-		waitForElementVisible(driver, LoginPageUI.USERID_TEXTBOX);
-		senkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, RegisterPageSteps.password);
-		
-		waitForElementClickable(driver, LoginPageUI.LOGIN_BUTTON);
-		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
-
+		loginPage.submitValidInfoToFormLogin(RegisterPageSteps.userName, RegisterPageSteps.password);
 	}
 
 }

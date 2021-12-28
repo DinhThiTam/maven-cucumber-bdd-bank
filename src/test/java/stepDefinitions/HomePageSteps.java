@@ -10,6 +10,7 @@ import cucumberOptions.Hooks;
 
 public class HomePageSteps {
 	WebDriver driver;
+	
 	public HomePageSteps() {
 		this.driver = Hooks.openAndQuitBrowser();
 	}
