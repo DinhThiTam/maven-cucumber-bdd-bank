@@ -37,7 +37,7 @@ public class LoginPageSteps extends BasePage{
 
 	@When("^Submit valid info to form login$")
 	public void submitValidInfoToFormLogin() {
-		loginPage.submitValidInfoToFormLogin(RegisterPageSteps.userName, RegisterPageSteps.password);
+		loginPage.submitValidInfoToFormLogin(testcontext.getDataContext().getContext(Context.USER_ID), testcontext.getDataContext().getContext(Context.PASSWORD));
 	}
 
 }

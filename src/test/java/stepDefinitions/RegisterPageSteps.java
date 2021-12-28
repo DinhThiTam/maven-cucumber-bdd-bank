@@ -9,24 +9,25 @@ import cucumberOptions.Hooks;
 import pageObject.PageGerneratorManager;
 import pageObject.RegisterPO;
 import pageUIs.RegisterPageUI;
+import utilities.DataUtil;
 
 public class RegisterPageSteps extends BasePage {
 	WebDriver driver;
 	RegisterPO registerPage;
 	TestContext testcontext;
-
-	static String userName, password;
+	DataUtil fakeData;
 
 	public RegisterPageSteps(TestContext testcontext) {
 		this.driver = Hooks.openAndQuitBrowser();
 		this.testcontext = testcontext;
+		fakeData = DataUtil.getData();
 		registerPage = PageGerneratorManager.getRegisterPage(driver);
 
 	}
 
 	@When("^Input to Username$")
 	public void inputToUsername() {
-		registerPage.inputToUsername("dttam.cntt@gmail.com");
+		registerPage.inputToUsername(fakeData.getEmailAddress());
 
 	}
 

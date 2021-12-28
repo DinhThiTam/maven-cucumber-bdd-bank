@@ -1,4 +1,3 @@
-@login
 Feature: Register and Login to BankGuru
   I want to use this template for my feature file
 

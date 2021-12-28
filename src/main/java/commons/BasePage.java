@@ -452,6 +452,11 @@ public class BasePage {
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", getElement(driver, locator));
 	}
+	
+	public void removeAttributeInDOM(WebDriver driver, String locator, String attributeRemove, String... params) {
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", getElement(driver, getDynamicLocator(locator, params)));
+	}
 
 	public boolean areJQueryAndJSLoadedSuccess(WebDriver driver) {
 		explicitWait = new WebDriverWait(driver, longTimeout);

@@ -12,9 +12,10 @@ import cucumber.api.junit.Cucumber;
 		glue = "stepDefinitions",
 		//dryRun = true,
 		monochrome = true,
-		plugin = {"pretty", "html:target/site/cucumber-report-defalut","json:target/site/cucumber.json"},
+		plugin = {"pretty", "html:target/site/cucumber-report-default","json:target/site/cucumber.json"},
 		snippets = SnippetType.CAMELCASE,
-		tags = {" @register_login"})
+		tags = {"@newcustomers"})
+
 public class TestRunner {
 
 }
